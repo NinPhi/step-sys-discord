@@ -40,6 +40,11 @@ bld/
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
+# Configuration
+appsettings.*
+appsettings.Development.*
+appsettings.Production.*
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
