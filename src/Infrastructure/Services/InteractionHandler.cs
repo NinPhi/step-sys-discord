@@ -27,6 +27,7 @@ internal class InteractionHandler : IHostedService
 
         _interactions.Log += message =>
         {
+            // Mapping log levels to ILogger implementation
             var logLevel = message.Severity switch
             {
                 LogSeverity.Critical => LogLevel.Critical,
@@ -51,6 +52,7 @@ internal class InteractionHandler : IHostedService
 
         _discord.Ready += async () =>
         {
+            // Adding commands to the configured guilds
             foreach (var guild in guilds)
             {
                 await _interactions.RegisterCommandsToGuildAsync(guild, true);
@@ -59,6 +61,7 @@ internal class InteractionHandler : IHostedService
 
         _discord.InteractionCreated += OnInteractionAsync;
 
+        // Adding discord bot interaction modules
         await _interactions.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
     }
 

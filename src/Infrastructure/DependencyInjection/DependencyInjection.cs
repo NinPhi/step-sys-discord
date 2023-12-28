@@ -1,4 +1,5 @@
-﻿using StepSys.Infrastructure.Services;
+﻿using StepSys.Infrastructure.Data;
+using StepSys.Infrastructure.Services;
 
 namespace StepSys.Infrastructure.DependencyInjection;
 
@@ -27,7 +28,25 @@ internal static class DependencyInjection
 
         services.AddSingleton<InteractionService>();
         services.AddHostedService<InteractionHandler>();
-        services.AddHostedService<DiscordStarter>();
+        services.AddHostedService<DiscordBotStarter>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddMediator(
+        this IServiceCollection services)
+    {
+        services.AddMediatR(config =>
+            config.RegisterServicesFromAssemblyContaining<Program>());
+
+        return services;
+    }
+
+    public static IServiceCollection AddDatabase(
+        this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddDbContext<AppDbContext>(opts =>
+            opts.UseSqlite(configuration.GetConnectionString("SqliteConnection")));
 
         return services;
     }

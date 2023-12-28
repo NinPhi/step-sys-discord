@@ -3,13 +3,13 @@ using Microsoft.Extensions.Logging;
 
 namespace StepSys.Infrastructure.Services;
 
-internal class DiscordStarter : IHostedService
+internal class DiscordBotStarter : IHostedService
 {
     private readonly DiscordSocketClient _discord;
     private readonly IConfiguration _config;
     private readonly ILogger<DiscordSocketClient> _logger;
 
-    public DiscordStarter(
+    public DiscordBotStarter(
         DiscordSocketClient discord,
         IConfiguration config,
         ILogger<DiscordSocketClient> logger)
@@ -20,6 +20,7 @@ internal class DiscordStarter : IHostedService
 
         _discord.Log += message =>
         {
+            // Mapping log levels to ILogger implementation
             var logLevel = message.Severity switch
             {
                 LogSeverity.Critical => LogLevel.Critical,
