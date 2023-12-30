@@ -1,4 +1,4 @@
-﻿namespace StepSys.Features;
+﻿namespace StepSys.Modules;
 
 public class EchoModule : InteractionModuleBase<SocketInteractionContext>
 {
